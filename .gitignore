@@ -15,7 +15,7 @@
 
 # production
 /build
-.docker/
+docker-compose.yml
 
 # misc
 .DS_Store
