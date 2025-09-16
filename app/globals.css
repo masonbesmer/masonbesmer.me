@@ -1,68 +1,24 @@
 @import "tailwindcss";
 
-@theme {
-  --font-family-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Menlo, "Liberation Mono", "Courier New", monospace;
-  
-  /* Cyberpunk Color Palette */
-  --color-black: #000000;
-  --color-night: #0a0a0f;
-  --color-dark: #111118;
-  --color-darker: #1a1a2e;
-  
-  /* Neon Colors */
-  --color-cyan-400: #00ffff;
-  --color-cyan-500: #00e6e6;
-  --color-pink-400: #ff007f;
-  --color-pink-500: #e6006b;
-  --color-yellow-400: #ffff00;
-  --color-yellow-500: #e6e600;
-  --color-purple-400: #9d00ff;
-  --color-purple-500: #8800e6;
-  
-  /* Text Colors */
-  --color-gray-100: #f0f0f5;
-  --color-gray-300: #c0c0d0;
-  --color-gray-400: #a0a0b0;
-  --color-gray-500: #808090;
-  --color-gray-700: #404050;
-  
-  /* Additional colors for better contrast */
-  --color-white: #ffffff;
-  --color-cyan: #00ffff;
-  --color-pink: #ff007f;
-  --color-yellow: #ffff00;
-  --color-purple: #9d00ff;
-}
-
-/* Global Styles */
+/* Global Styles - Force cyberpunk theme */
 * {
   box-sizing: border-box;
 }
 
-body {
-  background-color: var(--color-night);
-  color: var(--color-gray-100);
-  font-family: var(--font-family-sans);
-  overflow-x: hidden;
+html, body {
+  background-color: #0a0a0f !important;
+  color: #f0f0f5 !important;
+  margin: 0;
+  padding: 0;
 }
 
 /* Cyberpunk Animations */
-@keyframes glitch {
-  0%, 100% {
-    transform: translate(0);
+@keyframes scanLine {
+  0% {
+    transform: translateY(-100%);
   }
-  20% {
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    transform: translate(-2px, -2px);
-  }
-  60% {
-    transform: translate(2px, 2px);
-  }
-  80% {
-    transform: translate(2px, -2px);
+  100% {
+    transform: translateY(100vh);
   }
 }
 
@@ -75,51 +31,15 @@ body {
   }
 }
 
-@keyframes scanLine {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100vh);
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
   }
 }
 
-@keyframes typewriter {
-  from {
-    width: 0;
+@keyframes pulse {
+  50% {
+    opacity: .5;
   }
-  to {
-    width: 100%;
-  }
-}
-
-/* Utility Classes */
-.text-glow {
-  filter: drop-shadow(0 0 10px currentColor);
-}
-
-.text-glitch {
-  animation: glitch 0.3s infinite;
-}
-
-.neon-glow {
-  animation: neonGlow 2s ease-in-out infinite alternate;
-}
-
-.grid-bg {
-  background-image: 
-    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-.scan-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
-  animation: scanLine 3s linear infinite;
-  z-index: 1;
 }
