@@ -1,0 +1,61 @@
+{
+  "folders": [
+    {
+      "name": "Mason Besmer Website",
+      "path": ".",
+    },
+  ],
+  "settings": {
+    "typescript.preferences.quoteStyle": "double",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.cwd": "${workspaceFolder}",
+  },
+  "extensions": {
+    "recommendations": [
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.vscode-typescript-next",
+      "formulahendry.auto-rename-tag",
+      "christian-kohler.path-intellisense",
+      "ms-vscode.vscode-json",
+      "usernamehw.errorlens",
+      "gruntfuggly.todo-tree",
+      "ms-vscode.vscode-npm-scripts",
+      "christian-kohler.npm-intellisense",
+      "naumovs.color-highlight",
+      "streetsidesoftware.code-spell-checker",
+      "pkief.material-icon-theme",
+      "github.copilot",
+      "github.copilot-chat",
+    ],
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Start Development Server",
+        "type": "npm",
+        "script": "dev",
+        "group": {
+          "kind": "build",
+          "isDefault": true,
+        },
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new",
+        },
+        "runOptions": {
+          "runOn": "folderOpen",
+        },
+      },
+    ],
+  },
+}
