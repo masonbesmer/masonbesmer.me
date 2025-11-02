@@ -11,87 +11,39 @@ export default function Home() {
     // Simulate initial loading
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000); // Reset to 1 second for normal operation
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div style={{ backgroundColor: '#0a0a0f', color: '#f0f0f5', minHeight: '100vh', fontFamily: 'monospace' }}>
+    <>
       <LoadingScreen isLoading={isLoading} />
       
-      <main style={{ 
-        position: 'relative', 
-        minHeight: '100vh', 
-        backgroundColor: '#0a0a0f', 
-        overflow: 'hidden',
-        color: '#f0f0f5'
-      }}>
+      <main className="relative min-h-screen bg-night overflow-hidden">
         {/* Background Grid */}
-        <div style={{
-          position: 'fixed',
-          inset: '0',
-          backgroundImage: `
-            linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-          opacity: '0.1',
-          pointerEvents: 'none'
-        }}></div>
+        <div className="fixed inset-0 grid-bg opacity-10 pointer-events-none"></div>
         
         {/* Scanning Line */}
-        <div style={{
-          position: 'absolute',
-          top: '0',
-          left: '0',
-          width: '100%',
-          height: '2px',
-          background: 'linear-gradient(90deg, transparent, #00ffff, transparent)',
-          animation: 'scanLine 3s linear infinite',
-          zIndex: 1,
-          opacity: '0.3'
-        }}></div>
+        <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan to-transparent scan-line opacity-30 z-10"></div>
 
         {/* Navigation */}
-        <nav style={{
-          position: 'fixed',
-          top: '0',
-          left: '0',
-          right: '0',
-          zIndex: 40,
-          backgroundColor: 'rgba(10, 10, 15, 0.8)',
-          backdropFilter: 'blur(8px)',
-          borderBottom: '1px solid #404050'
-        }}>
-          <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '16px 24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div style={{
-                fontSize: '20px',
-                fontFamily: 'monospace',
-                fontWeight: 'bold',
-                color: '#00ffff',
-                filter: 'drop-shadow(0 0 10px #00ffff)'
-              }}>
+        <nav className="fixed top-0 left-0 right-0 z-40 bg-night/80 backdrop-blur-sm border-b border-gray-700">
+          <div className="max-w-7xl mx-auto px-6 py-4">
+            <div className="flex justify-between items-center">
+              <div className="text-xl font-mono font-bold text-cyan text-glow">
                 MASON.EXE
               </div>
-              <div style={{ display: 'flex', gap: '32px' }}>
+              <div className="hidden md:flex space-x-8">
                 {['HOME', 'ABOUT', 'SKILLS', 'PROJECTS', 'CONTACT'].map((item) => (
                   <button
                     key={item}
                     onClick={() => setActiveSection(item.toLowerCase())}
-                    style={{
-                      fontFamily: 'monospace',
-                      fontSize: '14px',
-                      background: 'none',
-                      border: 'none',
-                      color: activeSection === item.toLowerCase() ? '#00ffff' : '#c0c0d0',
-                      cursor: 'pointer',
-                      transition: 'color 0.3s',
-                      filter: activeSection === item.toLowerCase() ? 'drop-shadow(0 0 10px #00ffff)' : 'none'
-                    }}
-                    onMouseEnter={(e) => (e.target as HTMLButtonElement).style.color = '#00ffff'}
-                    onMouseLeave={(e) => (e.target as HTMLButtonElement).style.color = activeSection === item.toLowerCase() ? '#00ffff' : '#c0c0d0'}
+                    className={`font-mono text-sm transition-colors hover:text-cyan ${
+                      activeSection === item.toLowerCase() 
+                        ? 'text-cyan text-glow' 
+                        : 'text-gray-300'
+                    }`}
                   >
                     {item}
                   </button>
@@ -102,125 +54,49 @@ export default function Home() {
         </nav>
 
         {/* Hero Section */}
-        <section style={{
-          position: 'relative',
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '0 24px'
-        }}>
-          <div style={{ maxWidth: '1024px', textAlign: 'center' }}>
+        <section className="relative min-h-screen flex items-center justify-center px-6">
+          <div className="max-w-4xl mx-auto text-center">
             {/* Glitch Effect Background Text */}
-            <div style={{
-              position: 'absolute',
-              inset: '0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              opacity: '0.2'
-            }}>
-              <h1 style={{
-                fontSize: '128px',
-                fontFamily: 'monospace',
-                fontWeight: 'bold',
-                color: '#ff007f',
-                margin: '0'
-              }}>
+            <div className="absolute inset-0 flex items-center justify-center opacity-20">
+              <h1 className="text-8xl font-mono font-bold text-pink">
                 MASON
               </h1>
             </div>
             
             {/* Main Content */}
-            <div style={{ position: 'relative', zIndex: 10 }}>
-              <div style={{
-                fontSize: '14px',
-                fontFamily: 'monospace',
-                color: '#808090',
-                marginBottom: '16px'
-              }}>
+            <div className="relative z-10">
+              <div className="text-sm font-mono text-gray-500 mb-4">
                 &gt; WELCOME TO NIGHT CITY
               </div>
               
-              <h1 style={{
-                fontSize: '96px',
-                fontFamily: 'monospace',
-                fontWeight: 'bold',
-                marginBottom: '24px',
-                margin: '0 0 24px 0'
-              }}>
-                <span style={{ color: '#f0f0f5' }}>MASON</span>
-                <span style={{ color: '#00ffff', filter: 'drop-shadow(0 0 10px #00ffff)' }}>.</span>
-                <span style={{ color: '#ff007f', filter: 'drop-shadow(0 0 10px #ff007f)' }}>BESMER</span>
+              <h1 className="text-6xl md:text-8xl font-mono font-bold mb-6">
+                <span className="text-gray-100">MASON</span>
+                <span className="text-cyan text-glow">.</span>
+                <span className="text-pink text-glow">BESMER</span>
               </h1>
               
-              <div style={{
-                fontSize: '32px',
-                fontFamily: 'monospace',
-                color: '#c0c0d0',
-                marginBottom: '32px'
-              }}>
-                <span style={{ color: '#ffff00' }}>[</span>
+              <div className="text-xl md:text-2xl font-mono text-gray-300 mb-8">
+                <span className="text-yellow">[</span>
                 FULL STACK DEVELOPER
-                <span style={{ color: '#ffff00' }}>]</span>
+                <span className="text-yellow">]</span>
               </div>
               
-              <p style={{
-                fontSize: '18px',
-                color: '#a0a0b0',
-                maxWidth: '512px',
-                margin: '0 auto 48px',
-                lineHeight: '1.6'
-              }}>
+              <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
                 Crafting digital experiences in the neon-lit corridors of cyberspace. 
                 Specializing in modern web technologies and creating immersive user interfaces 
                 that bridge the gap between human and machine.
               </p>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button 
                   onClick={() => setActiveSection('projects')}
-                  style={{
-                    padding: '12px 32px',
-                    backgroundColor: 'transparent',
-                    border: '2px solid #00ffff',
-                    color: '#00ffff',
-                    fontFamily: 'monospace',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s',
-                    filter: 'drop-shadow(0 0 10px #00ffff)'
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLButtonElement).style.backgroundColor = '#00ffff';
-                    (e.target as HTMLButtonElement).style.color = '#0a0a0f';
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
-                    (e.target as HTMLButtonElement).style.color = '#00ffff';
-                  }}
+                  className="px-8 py-3 bg-transparent border-2 border-cyan text-cyan font-mono hover:bg-cyan hover:text-night transition-all duration-300 neon-glow"
                 >
                   VIEW PROJECTS
                 </button>
                 <button 
                   onClick={() => setActiveSection('contact')}
-                  style={{
-                    padding: '12px 32px',
-                    backgroundColor: 'transparent',
-                    border: '2px solid #ff007f',
-                    color: '#ff007f',
-                    fontFamily: 'monospace',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s',
-                    filter: 'drop-shadow(0 0 10px #ff007f)'
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLButtonElement).style.backgroundColor = '#ff007f';
-                    (e.target as HTMLButtonElement).style.color = '#0a0a0f';
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
-                    (e.target as HTMLButtonElement).style.color = '#ff007f';
-                  }}
+                  className="px-8 py-3 bg-transparent border-2 border-pink text-pink font-mono hover:bg-pink hover:text-night transition-all duration-300 neon-glow"
                 >
                   CONNECT
                 </button>
@@ -229,89 +105,45 @@ export default function Home() {
           </div>
 
           {/* Decorative Elements */}
-          <div style={{
-            position: 'absolute',
-            top: '80px',
-            left: '40px',
-            width: '16px',
-            height: '16px',
-            backgroundColor: '#ffff00',
-            animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite'
-          }}></div>
-          <div style={{
-            position: 'absolute',
-            bottom: '80px',
-            right: '40px',
-            width: '8px',
-            height: '8px',
-            backgroundColor: '#9d00ff',
-            animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
-            animationDelay: '1s'
-          }}></div>
+          <div className="absolute top-20 left-10 w-4 h-4 bg-yellow animate-ping"></div>
+          <div className="absolute bottom-20 right-10 w-2 h-2 bg-purple animate-ping" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 right-20 w-1 h-1 bg-cyan animate-ping" style={{ animationDelay: '2s' }}></div>
         </section>
 
         {/* About Section */}
-        <section style={{ position: 'relative', padding: '80px 24px', backgroundColor: '#111118' }}>
-          <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
-            <h2 style={{
-              fontSize: '48px',
-              fontFamily: 'monospace',
-              fontWeight: 'bold',
-              color: '#00ffff',
-              filter: 'drop-shadow(0 0 10px #00ffff)',
-              marginBottom: '48px',
-              textAlign: 'center'
-            }}>
+        <section className="relative py-20 px-6 bg-dark">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl font-mono font-bold text-cyan text-glow mb-12 text-center">
               &gt; NEURAL PROFILE
             </h2>
             
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'center' }}>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <div style={{ color: '#ff007f', fontFamily: 'monospace', fontSize: '14px', marginBottom: '16px' }}>
-                  [BACKGROUND.exe]
-                </div>
-                <p style={{ color: '#c0c0d0', lineHeight: '1.6', marginBottom: '24px' }}>
+                <div className="text-pink font-mono text-sm mb-4">[BACKGROUND.exe]</div>
+                <p className="text-gray-300 leading-relaxed mb-6">
                   I&apos;m a passionate full-stack developer who thrives in the digital realm. 
                   With expertise spanning modern web technologies, I create seamless experiences 
                   that feel both futuristic and intuitive.
                 </p>
-                <p style={{ color: '#c0c0d0', lineHeight: '1.6', marginBottom: '24px' }}>
+                <p className="text-gray-300 leading-relaxed mb-6">
                   My journey through the digital landscape has equipped me with the skills to 
                   navigate complex technical challenges while maintaining a focus on clean, 
                   efficient code and exceptional user experiences.
                 </p>
-                <div style={{ fontFamily: 'monospace', fontSize: '14px', color: '#808090' }}>
-                  &gt; STATUS: <span style={{ color: '#00ffff' }}>ONLINE</span><br/>
-                  &gt; LOCATION: <span style={{ color: '#ffff00' }}>NIGHT CITY</span><br/>
-                  &gt; SPECIALIZATION: <span style={{ color: '#ff007f' }}>WEB DEVELOPMENT</span>
+                <div className="font-mono text-sm text-gray-500">
+                  &gt; STATUS: <span className="text-cyan">ONLINE</span><br/>
+                  &gt; LOCATION: <span className="text-yellow">NIGHT CITY</span><br/>
+                  &gt; SPECIALIZATION: <span className="text-pink">WEB DEVELOPMENT</span>
                 </div>
               </div>
               
-              <div style={{ position: 'relative' }}>
-                <div style={{ width: '320px', height: '320px', margin: '0 auto', position: 'relative' }}>
-                  <div style={{
-                    position: 'absolute',
-                    inset: '0',
-                    border: '1px solid #00ffff',
-                    opacity: '0.5',
-                    animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
-                  }}></div>
-                  <div style={{
-                    position: 'absolute',
-                    inset: '16px',
-                    border: '1px solid #ff007f',
-                    opacity: '0.3',
-                    animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    animationDelay: '1s'
-                  }}></div>
-                  <div style={{
-                    position: 'absolute',
-                    inset: '0',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    <div style={{ fontSize: '96px', fontFamily: 'monospace', color: '#404050' }}>&lt;/&gt;</div>
+              <div className="relative">
+                <div className="w-80 h-80 mx-auto relative">
+                  <div className="absolute inset-0 border border-cyan opacity-50 animate-pulse"></div>
+                  <div className="absolute inset-4 border border-pink opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
+                  <div className="absolute inset-8 border border-yellow opacity-20 animate-pulse" style={{ animationDelay: '2s' }}></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-6xl font-mono text-gray-700">&lt;/&gt;</div>
                   </div>
                 </div>
               </div>
@@ -320,61 +152,38 @@ export default function Home() {
         </section>
 
         {/* Skills Section */}
-        <section style={{ position: 'relative', padding: '80px 24px', backgroundColor: 'rgba(26, 26, 46, 0.5)' }}>
-          <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
-            <h2 style={{
-              fontSize: '48px',
-              fontFamily: 'monospace',
-              fontWeight: 'bold',
-              color: '#ff007f',
-              filter: 'drop-shadow(0 0 10px #ff007f)',
-              marginBottom: '48px',
-              textAlign: 'center'
-            }}>
+        <section className="relative py-20 px-6 bg-darker/50">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl font-mono font-bold text-pink text-glow mb-12 text-center">
               &gt; SKILL_MATRIX
             </h2>
             
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
+            <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
                   category: 'FRONTEND',
                   skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'JavaScript'],
-                  color: '#00ffff'
+                  color: 'cyan'
                 },
                 {
                   category: 'BACKEND',
                   skills: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB', 'API Design'],
-                  color: '#ff007f'
+                  color: 'pink'
                 },
                 {
                   category: 'TOOLS',
                   skills: ['Git', 'Docker', 'AWS', 'Linux', 'CI/CD'],
-                  color: '#ffff00'
+                  color: 'yellow'
                 }
               ].map((category) => (
-                <div key={category.category} style={{
-                  border: '1px solid #404050',
-                  padding: '24px',
-                  transition: 'border-color 0.3s'
-                }}>
-                  <h3 style={{
-                    fontSize: '20px',
-                    fontFamily: 'monospace',
-                    fontWeight: 'bold',
-                    color: category.color,
-                    marginBottom: '24px'
-                  }}>
+                <div key={category.category} className="border border-gray-700 p-6 hover:border-gray-500 transition-colors">
+                  <h3 className={`text-xl font-mono font-bold text-${category.color} mb-6`}>
                     [{category.category}]
                   </h3>
-                  <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
+                  <ul className="space-y-3">
                     {category.skills.map((skill) => (
-                      <li key={skill} style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        color: '#c0c0d0',
-                        marginBottom: '12px'
-                      }}>
-                        <span style={{ color: category.color, marginRight: '12px' }}>&gt;</span>
+                      <li key={skill} className="flex items-center text-gray-300">
+                        <span className={`text-${category.color} mr-3`}>&gt;</span>
                         {skill}
                       </li>
                     ))}
@@ -385,70 +194,107 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Projects Section */}
+        <section className="relative py-20 px-6">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl font-mono font-bold text-yellow text-glow mb-12 text-center">
+              &gt; PROJECT_FILES
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  name: 'NEURAL_NETWORK_DASHBOARD',
+                  description: 'Real-time data visualization platform with cyberpunk aesthetics',
+                  tech: ['React', 'D3.js', 'WebSocket'],
+                  status: 'DEPLOYED'
+                },
+                {
+                  name: 'CRYPTO_WALLET_INTERFACE',
+                  description: 'Secure cryptocurrency management system',
+                  tech: ['Next.js', 'Web3', 'TypeScript'],
+                  status: 'IN_PROGRESS'
+                },
+                {
+                  name: 'AI_CHATBOT_CLIENT',
+                  description: 'Conversational AI interface with natural language processing',
+                  tech: ['Python', 'FastAPI', 'OpenAI'],
+                  status: 'DEPLOYED'
+                }
+              ].map((project) => (
+                <div key={project.name} className="border border-gray-700 p-6 hover:border-cyan transition-colors group">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-mono font-bold text-gray-100 group-hover:text-cyan transition-colors">
+                      {project.name}
+                    </h3>
+                    <span className={`text-xs font-mono px-2 py-1 ${
+                      project.status === 'DEPLOYED' 
+                        ? 'text-cyan bg-cyan/20' 
+                        : 'text-yellow bg-yellow/20'
+                    }`}>
+                      {project.status}
+                    </span>
+                  </div>
+                  <p className="text-gray-400 mb-4 text-sm">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="text-xs font-mono text-pink bg-pink/20 px-2 py-1">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Contact Section */}
-        <section style={{ position: 'relative', padding: '80px 24px', backgroundColor: 'rgba(26, 26, 46, 0.5)', textAlign: 'center' }}>
-          <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
-            <h2 style={{
-              fontSize: '48px',
-              fontFamily: 'monospace',
-              fontWeight: 'bold',
-              color: '#9d00ff',
-              filter: 'drop-shadow(0 0 10px #9d00ff)',
-              marginBottom: '48px'
-            }}>
+        <section className="relative py-20 px-6 bg-darker/50">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-mono font-bold text-purple text-glow mb-12">
               &gt; ESTABLISH_CONNECTION
             </h2>
             
-            <p style={{
-              fontSize: '20px',
-              color: '#c0c0d0',
-              marginBottom: '48px'
-            }}>
+            <p className="text-xl text-gray-300 mb-12">
               Ready to jack into collaborative cyberspace? 
               Let&apos;s build something extraordinary together.
             </p>
             
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', marginBottom: '48px' }}>
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
               {[
-                { label: 'EMAIL', value: 'mason@besmer.me', color: '#00ffff' },
-                { label: 'GITHUB', value: '@masonbesmer', color: '#ff007f' },
-                { label: 'LINKEDIN', value: '/in/masonbesmer', color: '#ffff00' }
+                { label: 'EMAIL', value: 'mason@besmer.me', color: 'cyan' },
+                { label: 'GITHUB', value: '@masonbesmer', color: 'pink' },
+                { label: 'LINKEDIN', value: '/in/masonbesmer', color: 'yellow' }
               ].map((contact) => (
-                <div key={contact.label} style={{
-                  border: '1px solid #404050',
-                  padding: '16px',
-                  transition: 'border-color 0.3s'
-                }}>
-                  <div style={{
-                    color: contact.color,
-                    fontFamily: 'monospace',
-                    fontSize: '14px',
-                    marginBottom: '8px'
-                  }}>
+                <div key={contact.label} className="border border-gray-700 p-4 hover:border-gray-500 transition-colors">
+                  <div className={`text-${contact.color} font-mono text-sm mb-2`}>
                     [{contact.label}]
                   </div>
-                  <div style={{ color: '#c0c0d0', fontFamily: 'monospace' }}>
+                  <div className="text-gray-300 font-mono">
                     {contact.value}
                   </div>
                 </div>
               ))}
             </div>
             
-            <div style={{ fontFamily: 'monospace', fontSize: '14px', color: '#808090' }}>
+            <div className="font-mono text-sm text-gray-500">
               &gt; TRANSMISSION_ENDS
             </div>
           </div>
         </section>
 
         {/* Footer */}
-        <footer style={{ position: 'relative', padding: '32px 24px', borderTop: '1px solid #404050' }}>
-          <div style={{ maxWidth: '1152px', margin: '0 auto', textAlign: 'center' }}>
-            <div style={{ color: '#808090', fontFamily: 'monospace', fontSize: '14px' }}>
+        <footer className="relative py-8 px-6 border-t border-gray-700">
+          <div className="max-w-6xl mx-auto text-center">
+            <div className="text-gray-500 font-mono text-sm">
               © 2024 MASON.BESMER | ALL_RIGHTS_RESERVED | NIGHT_CITY_DIVISION
             </div>
           </div>
         </footer>
       </main>
-    </div>
+    </>
   );
 }

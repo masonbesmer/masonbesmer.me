@@ -47,106 +47,44 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps) {
   if (!showLoader) return null;
 
   return (
-    <div style={{
-      position: 'fixed',
-      inset: '0',
-      zIndex: 50,
-      backgroundColor: '#0a0a0f',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
+    <div className="fixed inset-0 z-50 bg-night flex items-center justify-center">
       {/* Background Grid */}
-      <div style={{
-        position: 'absolute',
-        inset: '0',
-        backgroundImage: `
-          linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px)
-        `,
-        backgroundSize: '50px 50px',
-        opacity: '0.2'
-      }}></div>
+      <div className="absolute inset-0 grid-bg opacity-20"></div>
       
       {/* Scanning Line */}
-      <div style={{
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '2px',
-        background: 'linear-gradient(90deg, transparent, #00ffff, transparent)',
-        animation: 'scanLine 3s linear infinite'
-      }}></div>
+      <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan to-transparent scan-line"></div>
       
       {/* Loading Content */}
-      <div style={{ textAlign: 'center', zIndex: 10 }}>
+      <div className="text-center z-10">
         {/* Logo/Brand */}
-        <div style={{ marginBottom: '32px' }}>
-          <h1 style={{
-            fontSize: '48px',
-            fontFamily: 'monospace',
-            fontWeight: 'bold',
-            color: '#00ffff',
-            filter: 'drop-shadow(0 0 10px #00ffff)',
-            marginBottom: '8px',
-            animation: 'neonGlow 2s ease-in-out infinite alternate'
-          }}>
+        <div className="mb-8">
+          <h1 className="text-5xl font-mono font-bold text-cyan text-glow mb-2 neon-glow">
             MASON.EXE
           </h1>
-          <div style={{
-            color: '#808090',
-            fontSize: '14px',
-            fontFamily: 'monospace'
-          }}>
+          <div className="text-gray-500 text-sm font-mono">
             INITIALIZING NEURAL INTERFACE...
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div style={{ width: '320px', margin: '0 auto 24px' }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            fontSize: '12px',
-            color: '#808090',
-            fontFamily: 'monospace',
-            marginBottom: '8px'
-          }}>
+        <div className="w-80 mx-auto mb-6">
+          <div className="flex justify-between text-xs text-gray-500 font-mono mb-2">
             <span>LOADING</span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <div style={{
-            height: '4px',
-            backgroundColor: '#404050',
-            position: 'relative',
-            overflow: 'hidden'
-          }}>
-            <div style={{
-              height: '100%',
-              background: 'linear-gradient(to right, #00ffff, #ff007f)',
-              transition: 'width 0.2s ease-out',
-              width: `${progress}%`,
-              position: 'relative'
-            }}>
-              <div style={{
-                position: 'absolute',
-                inset: '0',
-                background: 'linear-gradient(to right, transparent, white)',
-                opacity: '0.3',
-                animation: 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite'
-              }}></div>
+          <div className="h-1 bg-gray-700 relative overflow-hidden">
+            <div 
+              className="h-full bg-gradient-to-r from-cyan to-pink transition-all duration-200 ease-out relative"
+              style={{ width: `${progress}%` }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white opacity-30 animate-pulse"></div>
             </div>
           </div>
         </div>
 
         {/* Status Text */}
-        <div style={{
-          fontSize: '12px',
-          color: '#a0a0b0',
-          fontFamily: 'monospace'
-        }}>
-          <div style={{ animation: 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}>
+        <div className="text-xs text-gray-400 font-mono">
+          <div className="animate-pulse">
             {progress < 30 && "CONNECTING TO NIGHT CITY..."}
             {progress >= 30 && progress < 60 && "LOADING NEURAL PATHWAYS..."}
             {progress >= 60 && progress < 90 && "INITIALIZING CYBERDECK..."}
@@ -155,35 +93,9 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps) {
         </div>
 
         {/* Decorative Elements */}
-        <div style={{
-          position: 'absolute',
-          top: '25%',
-          left: '25%',
-          width: '8px',
-          height: '8px',
-          backgroundColor: '#ff007f',
-          animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite'
-        }}></div>
-        <div style={{
-          position: 'absolute',
-          top: '75%',
-          right: '25%',
-          width: '4px',
-          height: '4px',
-          backgroundColor: '#ffff00',
-          animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
-          animationDelay: '1s'
-        }}></div>
-        <div style={{
-          position: 'absolute',
-          bottom: '25%',
-          left: '33%',
-          width: '4px',
-          height: '4px',
-          backgroundColor: '#9d00ff',
-          animation: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
-          animationDelay: '2s'
-        }}></div>
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-pink animate-ping"></div>
+        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-yellow animate-ping" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-purple animate-ping" style={{ animationDelay: '2s' }}></div>
       </div>
     </div>
   );
