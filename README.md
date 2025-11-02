@@ -1,5 +1,24 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## 🚀 One-Click Setup for Windows
+
+For Windows users, we provide a one-click setup script that installs all required tools and configures VS Code as a fully featured IDE:
+
+**Simply double-click `setup.bat` or run in PowerShell:**
+
+```powershell
+.\setup.ps1
+```
+
+This will:
+
+- Install Node.js and VS Code (if needed)
+- Install all recommended VS Code extensions
+- Configure the development environment with hot reload
+- Open the workspace ready for development
+
+📖 **[Complete Setup Guide](./VSCODE_SETUP.md)**
+
 ## Getting Started
 
 First, run the development server:
