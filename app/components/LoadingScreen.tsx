@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface LoadingScreenProps {
   isLoading: boolean;
@@ -18,10 +18,10 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps) {
       // Show loader after 500ms
       timeout = setTimeout(() => {
         setShowLoader(true);
-        
+
         // Simulate loading progress
         progressInterval = setInterval(() => {
-          setProgress(prev => {
+          setProgress((prev) => {
             if (prev >= 90) return prev;
             return prev + Math.random() * 10;
           });
@@ -32,13 +32,13 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps) {
       const completeTimer = setTimeout(() => {
         setProgress(100);
       }, 0);
-      
+
       // Hide loader after animation completes
       const hideTimer = setTimeout(() => {
         setShowLoader(false);
         setProgress(0);
       }, 500);
-      
+
       return () => {
         clearTimeout(completeTimer);
         clearTimeout(hideTimer);
@@ -54,43 +54,43 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps) {
   if (!showLoader) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-night flex items-center justify-center">
+    <div className="bg-night fixed inset-0 z-50 flex items-center justify-center">
       {/* Background Grid */}
-      <div className="absolute inset-0 grid-bg opacity-20"></div>
-      
+      <div className="grid-bg absolute inset-0 opacity-20"></div>
+
       {/* Scanning Line */}
-      <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan to-transparent scan-line"></div>
-      
+      <div className="via-cyan scan-line absolute top-0 left-0 h-0.5 w-full bg-gradient-to-r from-transparent to-transparent"></div>
+
       {/* Loading Content */}
-      <div className="text-center z-10">
+      <div className="z-10 text-center">
         {/* Logo/Brand */}
         <div className="mb-8">
-          <h1 className="text-5xl font-mono font-bold text-cyan text-glow mb-2 neon-glow">
+          <h1 className="text-cyan text-glow neon-glow mb-2 font-mono text-5xl font-bold">
             MASON.EXE
           </h1>
-          <div className="text-gray-500 text-sm font-mono">
+          <div className="font-mono text-sm text-gray-500">
             INITIALIZING NEURAL INTERFACE...
           </div>
         </div>
 
         {/* Progress Bar */}
-        <div className="w-80 mx-auto mb-6">
-          <div className="flex justify-between text-xs text-gray-500 font-mono mb-2">
+        <div className="mx-auto mb-6 w-80">
+          <div className="mb-2 flex justify-between font-mono text-xs text-gray-500">
             <span>LOADING</span>
             <span>{Math.round(progress)}%</span>
           </div>
-          <div className="h-1 bg-gray-700 relative overflow-hidden">
-            <div 
-              className="h-full bg-gradient-to-r from-cyan to-pink transition-all duration-200 ease-out relative"
+          <div className="relative h-1 overflow-hidden bg-gray-700">
+            <div
+              className="from-cyan to-pink relative h-full bg-gradient-to-r transition-all duration-200 ease-out"
               style={{ width: `${progress}%` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white opacity-30 animate-pulse"></div>
+              <div className="absolute inset-0 animate-pulse bg-gradient-to-r from-transparent to-white opacity-30"></div>
             </div>
           </div>
         </div>
 
         {/* Status Text */}
-        <div className="text-xs text-gray-400 font-mono">
+        <div className="font-mono text-xs text-gray-400">
           <div className="animate-pulse">
             {progress < 30 && "CONNECTING TO NIGHT CITY..."}
             {progress >= 30 && progress < 60 && "LOADING NEURAL PATHWAYS..."}
@@ -100,9 +100,15 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps) {
         </div>
 
         {/* Decorative Elements */}
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-pink animate-ping"></div>
-        <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-yellow animate-ping" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-purple animate-ping" style={{ animationDelay: '2s' }}></div>
+        <div className="bg-pink absolute top-1/4 left-1/4 h-2 w-2 animate-ping"></div>
+        <div
+          className="bg-yellow absolute top-3/4 right-1/4 h-1 w-1 animate-ping"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="bg-purple absolute bottom-1/4 left-1/3 h-1 w-1 animate-ping"
+          style={{ animationDelay: "2s" }}
+        ></div>
       </div>
     </div>
   );
