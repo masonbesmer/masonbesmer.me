@@ -28,14 +28,21 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps) {
         }, 100);
       }, 500);
     } else {
-      // Complete progress immediately when loading is done
-      setProgress(100);
+      // Complete progress immediately when loading is done - use setTimeout to avoid synchronous setState in effect
+      const completeTimer = setTimeout(() => {
+        setProgress(100);
+      }, 0);
       
       // Hide loader after animation completes
-      setTimeout(() => {
+      const hideTimer = setTimeout(() => {
         setShowLoader(false);
         setProgress(0);
       }, 500);
+      
+      return () => {
+        clearTimeout(completeTimer);
+        clearTimeout(hideTimer);
+      };
     }
 
     return () => {

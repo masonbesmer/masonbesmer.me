@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../app/**/*.{ts,tsx}";
+@source "../app/**/*.{js,jsx}";
 
 @theme {
   /* Font Families */
@@ -31,12 +33,12 @@
   }
 
   html {
-    background-color: theme(colors.night);
+    background-color: var(--color-night);
   }
 
   body {
-    background-color: theme(colors.night);
-    color: theme(colors.gray.100);
+    background-color: var(--color-night);
+    color: var(--color-gray-100);
     margin: 0;
     padding: 0;
   }
