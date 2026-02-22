@@ -9,9 +9,8 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
+# vite
+/dist/
 
 # production
 /build
@@ -34,10 +33,13 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
+
+# next.js
+/.next/
 
 # setup script temp files
 *.msi
 *.exe
 temp/
 /tmp/
+tmpclaude*

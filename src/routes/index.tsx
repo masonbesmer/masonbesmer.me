@@ -1,9 +1,12 @@
-"use client";
-
+import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import LoadingScreen from "./components/LoadingScreen";
+import LoadingScreen from "../components/LoadingScreen";
 
-export default function Home() {
+export const Route = createFileRoute("/")({
+  component: Home,
+});
+
+function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
 
@@ -186,7 +189,7 @@ export default function Home() {
                   category: "FRONTEND",
                   skills: [
                     "React",
-                    "Next.js",
+                    "TanStack Router",
                     "TypeScript",
                     "Tailwind CSS",
                     "JavaScript",
@@ -257,7 +260,7 @@ export default function Home() {
                 {
                   name: "CRYPTO_WALLET_INTERFACE",
                   description: "Secure cryptocurrency management system",
-                  tech: ["Next.js", "Web3", "TypeScript"],
+                  tech: ["TanStack Router", "Web3", "TypeScript"],
                   status: "IN_PROGRESS",
                 },
                 {

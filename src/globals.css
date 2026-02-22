@@ -1,6 +1,5 @@
 @import "tailwindcss";
-@source "../app/**/*.{ts,tsx}";
-@source "../app/**/*.{js,jsx}";
+@source "./**/*.{ts,tsx}";
 
 @theme {
   /* Font Families */

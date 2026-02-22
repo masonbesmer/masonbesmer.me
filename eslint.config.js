@@ -1,10 +1,11 @@
-import nextConfig from "eslint-config-next";
-
-const eslintConfig = [
-  ...nextConfig,
+export default [
   {
-    ignores: [".next/**/*", "out/**/*", "node_modules/**/*", "*.log", ".env*"],
+    ignores: [
+      "dist/**/*",
+      "node_modules/**/*",
+      "*.log",
+      ".env*",
+      "src/routeTree.gen.ts",
+    ],
   },
 ];
-
-export default eslintConfig;

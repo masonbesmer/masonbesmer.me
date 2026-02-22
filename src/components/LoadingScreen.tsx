@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 
 interface LoadingScreenProps {
@@ -11,8 +9,8 @@ export default function LoadingScreen({ isLoading }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    let progressInterval: NodeJS.Timeout;
+    let timeout: ReturnType<typeof setTimeout>;
+    let progressInterval: ReturnType<typeof setInterval>;
 
     if (isLoading) {
       // Show loader after 500ms
