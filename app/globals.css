@@ -2,31 +2,52 @@
 @source "../app/**/*.{ts,tsx}";
 @source "../app/**/*.{js,jsx}";
 
-@theme {
-  /* Font Families */
-  --font-family-mono:
-    ui-monospace, SFMono-Regular, "SF Mono", Monaco, Menlo, "Liberation Mono",
-    "Courier New", monospace;
+/* =============================================
+   CSS Custom Properties – Cyberpunk Palette
+   ============================================= */
+:root {
+  --bg-base: #0d0d0f;
+  --bg-surface: #1b1b2a;
+  --accent-primary: #ff007a;
+  --accent-secondary: #00ffff;
+  --accent-tertiary: #00ffb3;
+  --accent-warning: #ffd600;
+  --accent-danger: #ff3d00;
+  --text-primary: #e8e8f0;
+  --text-muted: #7a7a9a;
+  --glow-primary: 0 0 8px #ff007a, 0 0 20px #ff007a55;
+  --glow-secondary: 0 0 8px #00ffff, 0 0 20px #00ffff55;
+}
 
-  /* Custom Colors */
-  --color-night: #0a0a0f;
+@theme {
+  /* Font Families – using Tailwind v4 --font-* naming to generate font-display / font-mono utilities */
+  --font-display: "Orbitron", sans-serif;
+  --font-mono:
+    "Share Tech Mono", ui-monospace, SFMono-Regular, "SF Mono", Monaco, Menlo,
+    "Liberation Mono", "Courier New", monospace;
+
+  /* Custom Colors – updated to match spec */
+  --color-night: #0d0d0f;
   --color-dark: #111118;
-  --color-darker: #1a1a2e;
+  --color-darker: #1b1b2a;
 
   --color-cyan: #00ffff;
-  --color-pink: #ff007f;
-  --color-yellow: #ffff00;
+  --color-pink: #ff007a;
+  --color-yellow: #ffd600;
+  --color-green: #00ffb3;
   --color-purple: #9d00ff;
+  --color-danger: #ff3d00;
 
-  --color-gray-100: #f0f0f5;
+  --color-gray-100: #e8e8f0;
   --color-gray-300: #c0c0d0;
   --color-gray-400: #a0a0b0;
-  --color-gray-500: #808090;
+  --color-gray-500: #7a7a9a;
   --color-gray-700: #404050;
 
   /* Animations */
   --animate-scan-line: scanLine 3s linear infinite;
   --animate-neon-glow: neonGlow 2s ease-in-out infinite alternate;
+  --animate-neon-flicker: neonFlicker 4s infinite;
 }
 
 @layer base {
@@ -35,18 +56,49 @@
   }
 
   html {
-    background-color: var(--color-night);
+    background-color: var(--bg-base);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-primary) var(--bg-surface);
   }
 
   body {
-    background-color: var(--color-night);
-    color: var(--color-gray-100);
+    background-color: var(--bg-base);
+    color: var(--text-primary);
     margin: 0;
     padding: 0;
   }
+
+  /* Custom scrollbar – WebKit */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-surface);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    box-shadow: var(--glow-primary);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    box-shadow: 0 0 14px var(--accent-primary);
+  }
+
+  /* Neon <hr> divider */
+  hr.neon-hr {
+    border: none;
+    border-top: 1px solid var(--accent-secondary);
+    box-shadow: 0 0 6px var(--accent-secondary);
+    margin: 0;
+    opacity: 0.4;
+  }
 }
 
-/* Cyberpunk Animations */
+/* =============================================
+   Cyberpunk Animations
+   ============================================= */
 @keyframes scanLine {
   0% {
     transform: translateY(-100%);
@@ -67,13 +119,94 @@
   }
 }
 
+@keyframes neonFlicker {
+  0%,
+  93%,
+  100% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 0.75;
+  }
+  96% {
+    opacity: 1;
+  }
+  97% {
+    opacity: 0.55;
+  }
+  99% {
+    opacity: 1;
+  }
+}
+
+/* Glitch – ::before layer (magenta) */
+@keyframes glitch-before {
+  0%,
+  87%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+    transform: translateX(0);
+  }
+  88% {
+    clip-path: inset(10% 0 70% 0);
+    transform: translateX(-4px);
+  }
+  90% {
+    clip-path: inset(55% 0 20% 0);
+    transform: translateX(3px);
+  }
+  92% {
+    clip-path: inset(30% 0 50% 0);
+    transform: translateX(-2px);
+  }
+  94% {
+    clip-path: inset(0 0 100% 0);
+    transform: translateX(0);
+  }
+}
+
+/* Glitch – ::after layer (cyan) */
+@keyframes glitch-after {
+  0%,
+  88%,
+  100% {
+    clip-path: inset(0 0 100% 0);
+    transform: translateX(0);
+  }
+  89% {
+    clip-path: inset(65% 0 10% 0);
+    transform: translateX(4px);
+  }
+  91% {
+    clip-path: inset(25% 0 55% 0);
+    transform: translateX(-3px);
+  }
+  93% {
+    clip-path: inset(0 0 100% 0);
+    transform: translateX(0);
+  }
+}
+
+/* =============================================
+   Utilities
+   ============================================= */
 @layer utilities {
   .text-glow {
     filter: drop-shadow(0 0 10px currentColor);
   }
 
+  .text-shadow-glow {
+    text-shadow:
+      0 0 8px currentColor,
+      0 0 20px currentColor;
+  }
+
   .neon-glow {
     animation: neonGlow 2s ease-in-out infinite alternate;
+  }
+
+  .neon-flicker {
+    animation: neonFlicker 4s infinite;
   }
 
   .scan-line {
@@ -85,5 +218,89 @@
       linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
     background-size: 50px 50px;
+  }
+
+  /* Subtle scanline texture overlay */
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+
+  /* Cyberpunk "cut-corner" button shape */
+  .clip-btn {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 12px) 0,
+      100% 12px,
+      100% 100%,
+      12px 100%,
+      0 calc(100% - 12px)
+    );
+  }
+
+  /* Neon bottom-border glow for nav */
+  .nav-bottom-glow {
+    box-shadow: 0 1px 0 0 var(--accent-secondary),
+      0 0 14px rgba(0, 255, 255, 0.4);
+  }
+
+  /* Hover card glow – cyan */
+  .card-hover-glow:hover {
+    box-shadow: var(--glow-secondary);
+    border-color: var(--accent-secondary);
+  }
+
+  /* Glitch effect on headings */
+  .glitch {
+    position: relative;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    letter-spacing: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .glitch::before {
+    color: var(--accent-primary);
+    animation: glitch-before 6s infinite;
+    z-index: 1;
+  }
+
+  .glitch::after {
+    color: var(--accent-secondary);
+    animation: glitch-after 6s infinite;
+    z-index: 2;
+  }
+}
+
+/* =============================================
+   prefers-reduced-motion – disable all animations
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  .glitch::before,
+  .glitch::after,
+  .neon-glow,
+  .neon-flicker,
+  .scan-line {
+    animation: none;
+  }
+
+  * {
+    transition: none !important;
   }
 }

@@ -24,14 +24,17 @@ export default function Home() {
         {/* Background Grid */}
         <div className="grid-bg pointer-events-none fixed inset-0 opacity-10"></div>
 
+        {/* Scanlines texture overlay */}
+        <div className="scanlines fixed inset-0 opacity-40 z-0"></div>
+
         {/* Scanning Line */}
         <div className="via-cyan scan-line absolute top-0 left-0 z-10 h-0.5 w-full bg-gradient-to-r from-transparent to-transparent opacity-30"></div>
 
         {/* Navigation */}
-        <nav className="bg-night/80 fixed top-0 right-0 left-0 z-40 border-b border-gray-700 backdrop-blur-sm">
+        <nav className="bg-night/80 nav-bottom-glow fixed top-0 right-0 left-0 z-40 border-b border-cyan backdrop-blur-sm">
           <div className="mx-auto max-w-7xl px-6 py-4">
             <div className="flex items-center justify-between">
-              <div className="text-cyan text-glow font-mono text-xl font-bold">
+              <div className="text-cyan neon-flicker font-mono text-xl font-bold tracking-widest">
                 MASON.EXE
               </div>
               <div className="hidden space-x-8 md:flex">
@@ -40,10 +43,10 @@ export default function Home() {
                     <button
                       key={item}
                       onClick={() => setActiveSection(item.toLowerCase())}
-                      className={`hover:text-cyan font-mono text-sm transition-colors ${
+                      className={`font-mono text-sm tracking-widest transition-all duration-200 ${
                         activeSection === item.toLowerCase()
-                          ? "text-cyan text-glow"
-                          : "text-gray-300"
+                          ? "text-pink text-shadow-glow border-b border-pink"
+                          : "text-gray-300 hover:text-cyan hover:text-shadow-glow"
                       }`}
                     >
                       {item}
@@ -60,19 +63,24 @@ export default function Home() {
           <div className="mx-auto max-w-4xl text-center">
             {/* Glitch Effect Background Text */}
             <div className="absolute inset-0 flex items-center justify-center opacity-20">
-              <h1 className="text-pink font-mono text-8xl font-bold">MASON</h1>
+              <h1 className="text-pink font-display text-8xl font-bold">
+                MASON
+              </h1>
             </div>
 
             {/* Main Content */}
             <div className="relative z-10">
-              <div className="mb-4 font-mono text-sm text-gray-500">
+              <div className="mb-4 font-mono text-sm text-gray-500 tracking-widest">
                 &gt; WELCOME TO NIGHT CITY
               </div>
 
-              <h1 className="mb-6 font-mono text-6xl font-bold md:text-8xl">
+              <h1
+                data-text="MASON.BESMER"
+                className="glitch mb-6 font-display text-6xl font-bold tracking-widest md:text-8xl"
+              >
                 <span className="text-gray-100">MASON</span>
-                <span className="text-cyan text-glow">.</span>
-                <span className="text-pink text-glow">BESMER</span>
+                <span className="text-cyan text-shadow-glow">.</span>
+                <span className="text-pink text-shadow-glow">BESMER</span>
               </h1>
 
               <div className="mb-8 font-mono text-xl text-gray-300 md:text-2xl">
@@ -91,13 +99,13 @@ export default function Home() {
               <div className="flex flex-col justify-center gap-4 sm:flex-row">
                 <button
                   onClick={() => setActiveSection("projects")}
-                  className="border-cyan text-cyan hover:bg-cyan hover:text-night neon-glow border-2 bg-transparent px-8 py-3 font-mono transition-all duration-300"
+                  className="clip-btn border-cyan text-cyan hover:bg-cyan hover:text-night neon-glow border-2 bg-transparent px-8 py-3 font-mono tracking-widest transition-all duration-300"
                 >
                   VIEW PROJECTS
                 </button>
                 <button
                   onClick={() => setActiveSection("contact")}
-                  className="border-pink text-pink hover:bg-pink hover:text-night neon-glow border-2 bg-transparent px-8 py-3 font-mono transition-all duration-300"
+                  className="clip-btn border-pink text-pink hover:bg-pink hover:text-night neon-glow border-2 bg-transparent px-8 py-3 font-mono tracking-widest transition-all duration-300"
                 >
                   CONNECT
                 </button>
@@ -117,10 +125,12 @@ export default function Home() {
           ></div>
         </section>
 
+        <hr className="neon-hr" />
+
         {/* About Section */}
         <section className="bg-dark relative px-6 py-20">
           <div className="mx-auto max-w-6xl">
-            <h2 className="text-cyan text-glow mb-12 text-center font-mono text-4xl font-bold">
+            <h2 className="text-cyan text-shadow-glow mb-12 text-center font-display text-4xl font-bold tracking-widest">
               &gt; NEURAL PROFILE
             </h2>
 
@@ -173,10 +183,12 @@ export default function Home() {
           </div>
         </section>
 
+        <hr className="neon-hr" />
+
         {/* Skills Section */}
         <section className="bg-darker/50 relative px-6 py-20">
           <div className="mx-auto max-w-6xl">
-            <h2 className="text-pink text-glow mb-12 text-center font-mono text-4xl font-bold">
+            <h2 className="text-pink text-shadow-glow mb-12 text-center font-display text-4xl font-bold tracking-widest">
               &gt; SKILL_MATRIX
             </h2>
 
@@ -212,7 +224,7 @@ export default function Home() {
               ].map((category) => (
                 <div
                   key={category.category}
-                  className="border border-gray-700 p-6 transition-colors hover:border-gray-500"
+                  className="card-hover-glow border border-gray-700 p-6 transition-all duration-300"
                 >
                   <h3
                     className={`font-mono text-xl font-bold text-${category.color} mb-6`}
@@ -238,10 +250,12 @@ export default function Home() {
           </div>
         </section>
 
+        <hr className="neon-hr" />
+
         {/* Projects Section */}
         <section className="relative px-6 py-20">
           <div className="mx-auto max-w-6xl">
-            <h2 className="text-yellow text-glow mb-12 text-center font-mono text-4xl font-bold">
+            <h2 className="text-yellow text-shadow-glow mb-12 text-center font-display text-4xl font-bold tracking-widest">
               &gt; PROJECT_FILES
             </h2>
 
@@ -270,7 +284,7 @@ export default function Home() {
               ].map((project) => (
                 <div
                   key={project.name}
-                  className="hover:border-cyan group border border-gray-700 p-6 transition-colors"
+                  className="card-hover-glow group border border-gray-700 p-6 transition-all duration-300"
                 >
                   <div className="mb-4 flex items-center justify-between">
                     <h3 className="group-hover:text-cyan font-mono text-lg font-bold text-gray-100 transition-colors">
@@ -305,10 +319,12 @@ export default function Home() {
           </div>
         </section>
 
+        <hr className="neon-hr" />
+
         {/* Contact Section */}
         <section className="bg-darker/50 relative px-6 py-20">
           <div className="mx-auto max-w-4xl text-center">
-            <h2 className="text-purple text-glow mb-12 font-mono text-4xl font-bold">
+            <h2 className="text-purple text-shadow-glow mb-12 font-display text-4xl font-bold tracking-widest">
               &gt; ESTABLISH_CONNECTION
             </h2>
 
@@ -329,7 +345,7 @@ export default function Home() {
               ].map((contact) => (
                 <div
                   key={contact.label}
-                  className="border border-gray-700 p-4 transition-colors hover:border-gray-500"
+                  className="card-hover-glow border border-gray-700 p-4 transition-all duration-300"
                 >
                   <div
                     className={`text-${contact.color} mb-2 font-mono text-sm`}
