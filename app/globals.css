@@ -1,9 +1,89 @@
 @import "tailwindcss";
+@source "../app/**/*.{ts,tsx}";
+@source "../app/**/*.{js,jsx}";
 
 @theme {
-  --font-family-sans:
-    ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
-  --color-black: #000000;
-  --color-black-100: #000319;
+  /* Font Families */
+  --font-family-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Monaco, Menlo, "Liberation Mono",
+    "Courier New", monospace;
+
+  /* Custom Colors */
+  --color-night: #0a0a0f;
+  --color-dark: #111118;
+  --color-darker: #1a1a2e;
+
+  --color-cyan: #00ffff;
+  --color-pink: #ff007f;
+  --color-yellow: #ffff00;
+  --color-purple: #9d00ff;
+
+  --color-gray-100: #f0f0f5;
+  --color-gray-300: #c0c0d0;
+  --color-gray-400: #a0a0b0;
+  --color-gray-500: #808090;
+  --color-gray-700: #404050;
+
+  /* Animations */
+  --animate-scan-line: scanLine 3s linear infinite;
+  --animate-neon-glow: neonGlow 2s ease-in-out infinite alternate;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--color-night);
+  }
+
+  body {
+    background-color: var(--color-night);
+    color: var(--color-gray-100);
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Cyberpunk Animations */
+@keyframes scanLine {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes neonGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px currentColor)
+      drop-shadow(0 0 30px currentColor);
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    filter: drop-shadow(0 0 10px currentColor);
+  }
+
+  .neon-glow {
+    animation: neonGlow 2s ease-in-out infinite alternate;
+  }
+
+  .scan-line {
+    animation: scanLine 3s linear infinite;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
 }

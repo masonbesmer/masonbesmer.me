@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## 🚀 One-Click Setup for Windows
+## 🚀 One-Click Setup for Windows and your mom
 
 For Windows users, we provide a one-click setup script that installs all required tools and configures VS Code as a fully featured IDE:
 
